@@ -21,9 +21,12 @@ export class ErrorInterceptor implements HttpInterceptor {
                         }
                         const serverError = error.error;
                         let modalStateErrors = '';
-                        if (serverError.errors &&  serverError.errors === 'object') {
+                        console.log('Server error');
+                        console.log(serverError);
+                        if (serverError.errors && typeof serverError.errors === 'object') {
+                            console.log('Is validation error');
                             for (const key in serverError.errors) {
-                                if (serverError.error[key]) {
+                                if (serverError.errors[key]) {
                                     modalStateErrors += serverError.errors[key] + '\n';
 
                                 }
