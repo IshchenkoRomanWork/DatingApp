@@ -1,3 +1,6 @@
+import { AuthGuard } from './_guards/auth.guard';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 // import { NgxGalleryModule } from 'ngx-gallery';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MemberDetailResolver } from './_resolvers/membe-detail.resolver';
@@ -22,6 +25,7 @@ import { MemberListComponent } from './members/member-list/member-list.component
 import { MessagesComponent } from './messages/messages.component';
 import { ListsComponent } from './lists/lists.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
+import {MemberEditComponent} from './members/member-edit/member-edit.component';
 
 
 export function tokenGetter()
@@ -41,6 +45,7 @@ export function tokenGetter()
       MemberCardComponent,
       MemberDetailComponent,
       // NgxGalleryModule,
+      MemberEditComponent,
    ],
    imports: [
       BrowserModule,
@@ -66,7 +71,10 @@ export function tokenGetter()
       ErrorInterceptorProvider,
       AuthService,
       MemberDetailResolver,
-      MemberListResolver
+      MemberListResolver,
+      MemberEditResolver,
+      AuthGuard,
+      PreventUnsavedChanges,
    ],
    bootstrap: [
       AppComponent
