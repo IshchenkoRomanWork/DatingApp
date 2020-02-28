@@ -12,6 +12,7 @@ import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -26,6 +27,8 @@ import { MessagesComponent } from './messages/messages.component';
 import { ListsComponent } from './lists/lists.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import {MemberEditComponent} from './members/member-edit/member-edit.component';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+
 
 
 export function tokenGetter()
@@ -46,6 +49,7 @@ export function tokenGetter()
       MemberDetailComponent,
       // NgxGalleryModule,
       MemberEditComponent,
+      PhotoEditorComponent,
    ],
    imports: [
       BrowserModule,
@@ -56,6 +60,7 @@ export function tokenGetter()
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       // NgxGalleryModule,
+      FileUploadModule,
       JwtModule.forRoot(
          {
             config:

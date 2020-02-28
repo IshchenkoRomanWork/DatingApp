@@ -13,34 +13,39 @@ import { NgForm } from '@angular/forms';
 })
 export class MemberEditComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private alertify: AlertifyService, private userService: UserService, private authService: AuthService) { }
-  @ViewChild('editForm', {static: true}) editForm: NgForm
+  constructor(private route: ActivatedRoute, private alertify: AlertifyService,
+              private userService: UserService, private authService: AuthService) { }
+  @ViewChild('editForm', {static: true}) editForm: NgForm;
   user: User;
+  photoUrl: string;
   @HostListener('window:beforeunload', ['$event'])
-  unloadNotification($event: any){
-    if(this.editForm.dirty)
-    {
+  unloadNotification($event: any) {
+    if (this.editForm.dirty) {
       $event.returnValue = true;
     }
   }
 
   ngOnInit() {
-    this.route.data.subscribe(data =>
-      {
+    this.route.data.subscribe(data => {
         this.user = data['user'];
+      });
+    this.authService.currentPhotoUrl.subscribe(photoUrl => {
+        this.photoUrl = photoUrl;
       });
   }
 
-  updateUser()
-  {
+  updateUser() {
     console.log(this.user);
     this.userService.updateUser(this.authService.decodedToken.nameid, this.user).subscribe(next => {
       this.alertify.success('Profile updated successfully');
       this.editForm.reset(this.user);
     }, error => {
       this.alertify.error(error);
-    })
+    });
+  }
 
+  updateMainPhoto(url: string) {
+    this.photoUrl = url;
   }
 
 }
