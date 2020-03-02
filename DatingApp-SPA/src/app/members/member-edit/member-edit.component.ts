@@ -1,3 +1,4 @@
+import { BsDatepickerModule } from 'ngx-bootstrap';
 import { AuthService } from './../../_services/auth.service';
 import { UserService } from './../../_services/user.service';
 import { AlertifyService } from './../../_services/alertify.service';
